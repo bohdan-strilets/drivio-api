@@ -1,0 +1,12 @@
+model Subscription {
+  id                     String               @id @default(uuid())
+  userId                 String               @unique
+  plan                   SubscriptionPlan     @default(FREE)
+  status                 SubscriptionStatus   @default(ACTIVE)
+  provider               SubscriptionProvider @default(MANUAL)
+  providerSubscriptionId String?
+  startedAt              DateTime             @default(now())
+  expiresAt              DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

@@ -5,7 +5,7 @@ const env = process.env.NODE_ENV || 'development';
 config({ path: `.env.${env}` });
 
 export default defineConfig({
-  schema: 'prisma/schema.prisma',
+  schema: 'prisma/schema',
   migrations: {
     path: 'prisma/migrations',
   },

@@ -1,0 +1,28 @@
+model User {
+  id                 String             @id @default(uuid())
+  email              String             @unique
+  firstName          String?
+  lastName           String?
+  avatarMediaId      String?
+  coverMediaId       String?
+  status             UserStatus         @default(ACTIVE)
+  emailVerified      Boolean            @default(false)
+  emailVerifiedAt    DateTime?
+  lastLoginAt        DateTime?
+  loginCount         Int                @default(0)
+  registrationSource RegistrationSource @default(EMAIL)
+  locale             Language           @default(ENG)
+  timezone           String             @default("UTC")
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt()
+  deletedAt          DateTime?
+
+  authCredentials         AuthCredentials?
+  oAuthAccounts           OAuthAccount[]
+  emailVerificationTokens EmailVerificationToken[]
+  emailChangeTokens       EmailChangeToken[]
+  passwordResetTokens     PasswordResetToken[]
+  subscription            Subscription?
+  settings                Settings?
+  limits                  Limits?
+}

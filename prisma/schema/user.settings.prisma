@@ -1,0 +1,14 @@
+model Settings {
+  id                 String       @id @default(uuid())
+  userId             String       @unique
+  currency           Currency     @default(EUR)
+  distanceUnit       DistanceUnit @default(KM)
+  fuelUnit           FuelUnit     @default(LITER)
+  theme              Theme        @default(SYSTEM)
+  language           Language     @default(ENG)
+  dateFormat         DateFormat   @default(DD_MM_YYYY)
+  notificationsEmail Boolean      @default(true)
+  notificationsPush  Boolean      @default(true)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

@@ -1,0 +1,13 @@
+model OAuthAccount {
+  id                   String        @id @default(uuid())
+  userId               String
+  provider             OAuthProvider
+  providerUserId       String
+  email                String?
+  providerAccessToken  String?
+  providerRefreshToken String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerUserId])
+}

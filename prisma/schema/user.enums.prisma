@@ -1,0 +1,66 @@
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum RegistrationSource {
+  EMAIL
+  GOOGLE
+  APPLE
+}
+
+enum OAuthProvider {
+  GOOGLE
+  APPLE
+}
+
+enum SubscriptionPlan {
+  FREE
+  PRO
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  EXPIRED
+}
+
+enum SubscriptionProvider {
+  MANUAL
+  STRIPE
+}
+
+enum Currency {
+  EUR
+  USD
+  UAH
+}
+
+enum DistanceUnit {
+  KM
+  MI
+}
+
+enum FuelUnit {
+  LITER
+  GALLON
+}
+
+enum Theme {
+  LIGHT
+  DARK
+  SYSTEM
+}
+
+enum Language {
+  UKR
+  POL
+  ENG
+}
+
+enum DateFormat {
+  DD_MM_YYYY
+  MM_DD_YYYY
+  YYYY_MM_DD
+}

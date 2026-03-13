@@ -1,0 +1,9 @@
+model Limits {
+  id                    String @id @default(uuid())
+  userId                String @unique
+  maxCars               Int    @default(2)
+  maxGalleryStorageMb   Int    @default(500)
+  maxDocumentsStorageMb Int    @default(100)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
