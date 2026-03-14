@@ -1,0 +1,23 @@
+model Session {
+  id               String            @id @default(uuid())
+  userId           String
+  refreshTokenHash String            @unique
+  status           SessionStatus     @default(ACTIVE)
+  deviceType       SessionDeviceType @default(UNKNOWN)
+  deviceName       String?
+  deviceOS         String?
+  deviceBrowser    String?
+  ipAddress        String
+  userAgent        String
+  country          String?
+  city             String?
+  lastActivityAt   DateTime
+  expiresAt        DateTime
+  revokedAt        DateTime?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt()
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([id, userId])
+}

@@ -1,0 +1,12 @@
+enum SessionStatus {
+  ACTIVE
+  REVOKED
+  EXPIRED
+}
+
+enum SessionDeviceType {
+  WEB
+  MOBILE
+  TABLET
+  UNKNOWN
+}

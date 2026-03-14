@@ -25,4 +25,5 @@ model User {
   subscription            Subscription?
   settings                Settings?
   limits                  Limits?
+  sessions                Session[]
 }
