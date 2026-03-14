@@ -24,6 +24,9 @@
     "@prisma/adapter-pg": "^7.5.0",
     "@prisma/client": "^7.5.0",
     "bcrypt": "^5.1.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "cloudinary": "^2.9.0",
     "handlebars": "^4.7.8",
     "pg": "^8.20.0",
     "prisma": "^7.5.0",
@@ -72,12 +75,11 @@
       "ts"
     ],
     "moduleNameMapper": {
-      "^@config$": "<rootDir>/config",
-      "^@database$": "<rootDir>/database",
-      "^@modules/(.*)$": "<rootDir>/modules/$1",
-      "^@common/(.*)$": "<rootDir>/common/$1",
-      "^@config/(.*)$": "<rootDir>/config/$1",
-      "^@database/(.*)$": "<rootDir>/database/$1"
+      "^@config(.*)$": "<rootDir>/src/config$1",
+      "^@database(.*)$": "<rootDir>/src/database$1",
+      "^@database/*": "<rootDir>/src/database/*",
+      "^@modules(.*)$": "<rootDir>/src/modules$1",
+      "^@common(.*)$": "<rootDir>/src/common$1"
     },
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",

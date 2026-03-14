@@ -1,0 +1,20 @@
+model Media {
+  id                 String    @id @default(uuid())
+  ownerUserId         String
+  type                MediaType
+  mimeType            String
+  originalName        String
+  cloudinaryPublicId  String
+  width               Int?
+  height              Int?
+  durationSeconds     Int?
+  sizeBytes           Int?
+  isPublic            Boolean   @default(false)
+  createdAt           DateTime  @default(now())
+
+  owner  User         @relation(fields: [ownerUserId], references: [id], onDelete: Cascade)
+  usages MediaUsage[]
+
+  @@index([ownerUserId])
+  @@index([cloudinaryPublicId])
+}

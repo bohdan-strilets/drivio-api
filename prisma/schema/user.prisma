@@ -26,4 +26,5 @@ model User {
   settings                Settings?
   limits                  Limits?
   sessions                Session[]
+  ownedMedia              Media[]
 }

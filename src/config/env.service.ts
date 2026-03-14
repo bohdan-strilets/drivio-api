@@ -34,4 +34,16 @@ export class EnvService {
   get emailFrom(): string | undefined {
     return this.configService.get('EMAIL_FROM');
   }
+
+  get cloudinaryCloudName(): string | undefined {
+    return this.configService.get('CLOUDINARY_CLOUD_NAME');
+  }
+
+  get cloudinaryApiKey(): string | undefined {
+    return this.configService.get('CLOUDINARY_API_KEY');
+  }
+
+  get cloudinaryApiSecret(): string | undefined {
+    return this.configService.get('CLOUDINARY_API_SECRET');
+  }
 }

@@ -1,0 +1,13 @@
+enum MediaType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+enum MediaUsageType {
+  USER_AVATAR
+  USER_COVER
+  CAR_GALLERY
+  DOCUMENT_FILE
+  RECEIPT_IMAGE
+}

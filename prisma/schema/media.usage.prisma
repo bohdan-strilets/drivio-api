@@ -1,0 +1,14 @@
+model MediaUsage {
+  id         String         @id @default(uuid())
+  mediaId    String
+  entityType MediaUsageType
+  entityId   String
+  position   Int?
+  createdAt  DateTime      @default(now())
+
+  media Media @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@unique([entityType, entityId, position])
+  @@index([mediaId])
+  @@index([entityType, entityId])
+}
