@@ -1,0 +1,12 @@
+{{#if lead}}
+  <p style='margin-top: 0;'>{{lead}}</p>
+{{/if}}
+{{{content}}}
+{{#if buttonUrl}}
+  <p style='margin-top: 24px;'>
+    <a
+      href='{{buttonUrl}}'
+      style='display:inline-block; padding:10px 20px; font-size:14px; font-weight:500; background-color:#2563eb; color:#ffffff; text-decoration:none; border-radius:8px;'
+    >{{buttonText}}</a>
+  </p>
+{{/if}}

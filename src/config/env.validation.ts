@@ -8,6 +8,9 @@ export const envSchema = z.object({
 
   BCRYPT_SALT_ROUNDS: z.coerce.number().min(10).max(15).default(12),
   SECURITY_TOKEN_BYTES: z.coerce.number().min(16).max(64).default(32),
+
+  RESEND_API_KEY: z.string().min(1).optional(),
+  EMAIL_FROM: z.string().email().optional(),
 });
 
 export type EnvConfig = z.infer<typeof envSchema>;

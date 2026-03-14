@@ -26,4 +26,12 @@ export class EnvService {
   get securityTokenBytes(): number {
     return this.configService.get('SECURITY_TOKEN_BYTES');
   }
+
+  get resendApiKey(): string | undefined {
+    return this.configService.get('RESEND_API_KEY');
+  }
+
+  get emailFrom(): string | undefined {
+    return this.configService.get('EMAIL_FROM');
+  }
 }
