@@ -2,7 +2,7 @@ model EmailVerificationToken {
   id        String    @id @default(uuid())
   userId    String
   email     String
-  tokenHash String
+  tokenHash String    @unique
   expiresAt DateTime
   usedAt    DateTime?
   createdAt DateTime  @default(now())
