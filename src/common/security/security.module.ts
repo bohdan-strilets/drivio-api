@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 
-import { ConfigModule } from '../../config';
+import { ConfigModule } from '@config';
 
 import { PasswordService } from './password.service';
 import { TokenService } from './token.service';

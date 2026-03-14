@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AuthCredentials, Prisma } from '@prisma/client';
 
-import { PrismaService } from '../../../database';
+import { PrismaService } from '@database';
 
 @Injectable()
 export class AuthCredentialsRepository {

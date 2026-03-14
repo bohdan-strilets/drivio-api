@@ -2,7 +2,7 @@ import { randomBytes, createHash, timingSafeEqual } from 'crypto';
 
 import { Injectable } from '@nestjs/common';
 
-import { EnvService } from '../../config/env.service';
+import { EnvService } from '@config';
 
 import { HASH_ALGORITHM } from './constants';
 import { GeneratedToken } from './types';

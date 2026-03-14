@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EmailChangeToken, Prisma } from '@prisma/client';
 
-import { PrismaService, PrismaTransactionClient } from '../../../database';
+import { PrismaService, PrismaTransactionClient } from '@database';
 
 @Injectable()
 export class EmailChangeTokenRepository {

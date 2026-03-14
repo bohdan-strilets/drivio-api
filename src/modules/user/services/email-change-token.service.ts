@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { EmailChangeToken, Prisma } from '@prisma/client';
 
-import { TokenInvalidException } from '../../../common/error/exceptions';
-import { TokenService } from '../../../common/security';
+import { TokenInvalidException } from '@common/error';
+import { TokenService } from '@common/security';
+
 import { EmailChangeTokenRepository } from '../repositories';
 
 @Injectable()

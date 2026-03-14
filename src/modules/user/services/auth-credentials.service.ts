@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { AuthCredentials, Prisma } from '@prisma/client';
 
-import { UserNotFoundException } from '../../../common/error/exceptions';
-import { PasswordService } from '../../../common/security';
+import { UserNotFoundException } from '@common/error';
+import { PasswordService } from '@common/security';
+
 import { AuthCredentialsRepository } from '../repositories';
 
 @Injectable()
