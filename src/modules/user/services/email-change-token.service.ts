@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { EmailChangeToken, Prisma } from '@prisma/client';
 
 import { TokenInvalidException } from '../../../common/error/exceptions';
+import { TokenService } from '../../../common/security';
 import { PrismaService } from '../../../database';
 import { EmailChangeTokenRepository } from '../repositories';
 
@@ -10,6 +11,7 @@ export class EmailChangeTokenService {
   constructor(
     private readonly emailChangeTokenRepository: EmailChangeTokenRepository,
     private readonly prisma: PrismaService,
+    private readonly tokenService: TokenService,
   ) {}
 
   async create(
@@ -18,13 +20,29 @@ export class EmailChangeTokenService {
     return this.emailChangeTokenRepository.create(data);
   }
 
+  async createTokenForUser(
+    userId: string,
+    newEmail: string,
+    expiresAt: Date,
+  ): Promise<{ token: string; record: EmailChangeToken }> {
+    const { token, tokenHash } = this.tokenService.generate();
+    const record = await this.emailChangeTokenRepository.create({
+      user: { connect: { id: userId } },
+      newEmail,
+      tokenHash,
+      expiresAt,
+    });
+    return { token, record };
+  }
+
   private async findByTokenHash(
     tokenHash: string,
   ): Promise<EmailChangeToken | null> {
     return this.emailChangeTokenRepository.findByTokenHash(tokenHash);
   }
 
-  async validateTokenOrThrow(tokenHash: string): Promise<EmailChangeToken> {
+  async validateTokenOrThrow(plainToken: string): Promise<EmailChangeToken> {
+    const tokenHash = this.tokenService.hashToken(plainToken);
     const now = new Date();
     const token = await this.findByTokenHash(tokenHash);
 
@@ -43,7 +61,8 @@ export class EmailChangeTokenService {
     return token;
   }
 
-  async validateAndMarkAsUsed(tokenHash: string): Promise<EmailChangeToken> {
+  async validateAndMarkAsUsed(plainToken: string): Promise<EmailChangeToken> {
+    const tokenHash = this.tokenService.hashToken(plainToken);
     const now = new Date();
 
     return this.prisma.$transaction(async (tx) => {

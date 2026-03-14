@@ -18,4 +18,12 @@ export class EnvService {
   get databaseUrl(): string {
     return this.configService.get('DATABASE_URL');
   }
+
+  get bcryptSaltRounds(): number {
+    return this.configService.get('BCRYPT_SALT_ROUNDS');
+  }
+
+  get securityTokenBytes(): number {
+    return this.configService.get('SECURITY_TOKEN_BYTES');
+  }
 }

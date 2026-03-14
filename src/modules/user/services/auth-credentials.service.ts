@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { AuthCredentials, Prisma } from '@prisma/client';
 
 import { UserNotFoundException } from '../../../common/error/exceptions';
+import { PasswordService } from '../../../common/security';
 import { AuthCredentialsRepository } from '../repositories';
 
 @Injectable()
 export class AuthCredentialsService {
   constructor(
     private readonly authCredentialsRepository: AuthCredentialsRepository,
+    private readonly passwordService: PasswordService,
   ) {}
 
   async create(
@@ -35,6 +37,25 @@ export class AuthCredentialsService {
     return this.throwUserNotFoundIfNotExists(
       this.authCredentialsRepository.updatePassword(userId, passwordHash),
     );
+  }
+
+  async setPassword(
+    userId: string,
+    plainPassword: string,
+  ): Promise<AuthCredentials> {
+    const passwordHash = await this.passwordService.hash(plainPassword);
+    return this.updatePassword(userId, passwordHash);
+  }
+
+  async verifyPassword(
+    userId: string,
+    plainPassword: string,
+  ): Promise<boolean> {
+    const credentials = await this.findByUserId(userId);
+    if (!credentials) {
+      return false;
+    }
+    return this.passwordService.verify(plainPassword, credentials.passwordHash);
   }
 
   async incrementFailedAttempts(userId: string): Promise<AuthCredentials> {
