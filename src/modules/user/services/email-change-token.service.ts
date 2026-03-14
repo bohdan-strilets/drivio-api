@@ -3,14 +3,12 @@ import { EmailChangeToken, Prisma } from '@prisma/client';
 
 import { TokenInvalidException } from '../../../common/error/exceptions';
 import { TokenService } from '../../../common/security';
-import { PrismaService } from '../../../database';
 import { EmailChangeTokenRepository } from '../repositories';
 
 @Injectable()
 export class EmailChangeTokenService {
   constructor(
     private readonly emailChangeTokenRepository: EmailChangeTokenRepository,
-    private readonly prisma: PrismaService,
     private readonly tokenService: TokenService,
   ) {}
 
@@ -65,19 +63,27 @@ export class EmailChangeTokenService {
     const tokenHash = this.tokenService.hashToken(plainToken);
     const now = new Date();
 
-    return this.prisma.$transaction(async (tx) => {
-      const token = await tx.emailChangeToken.findUnique({
-        where: { tokenHash },
-      });
+    return this.emailChangeTokenRepository.runInTransaction(async (tx) => {
+      const token = await this.emailChangeTokenRepository.findByTokenHashTx(
+        tx,
+        tokenHash,
+      );
 
       if (!token || token.usedAt || token.expiresAt < now) {
         throw new TokenInvalidException();
       }
 
-      return tx.emailChangeToken.update({
-        where: { id: token.id },
-        data: { usedAt: now },
-      });
+      const result = await this.emailChangeTokenRepository.markAsUsedTx(
+        tx,
+        token.id,
+        now,
+      );
+
+      if (result.count === 0) {
+        throw new TokenInvalidException();
+      }
+
+      return token;
     });
   }
 
@@ -93,7 +99,7 @@ export class EmailChangeTokenService {
     return this.emailChangeTokenRepository.deleteByUserId(userId);
   }
 
-  async deleteExpired(): Promise<{ count: number }> {
-    return this.emailChangeTokenRepository.deleteExpired();
+  async deleteExpired(now = new Date()): Promise<{ count: number }> {
+    return this.emailChangeTokenRepository.deleteExpired(now);
   }
 }
