@@ -4,12 +4,14 @@ import {
   AuthCredentialsRepository,
   EmailChangeTokenRepository,
   EmailVerificationTokenRepository,
+  LimitsRepository,
   UserRepository,
 } from './repositories';
 import {
   AuthCredentialsService,
   EmailChangeTokenService,
   EmailVerificationTokenService,
+  LimitsService,
   UserService,
 } from './services';
 import { UserController } from './user.controller';
@@ -23,6 +25,8 @@ import { UserController } from './user.controller';
     EmailChangeTokenRepository,
     EmailVerificationTokenService,
     EmailVerificationTokenRepository,
+    LimitsService,
+    LimitsRepository,
     UserService,
     UserRepository,
   ],
@@ -30,6 +34,7 @@ import { UserController } from './user.controller';
     AuthCredentialsService,
     EmailChangeTokenService,
     EmailVerificationTokenService,
+    LimitsService,
     UserService,
   ],
 })
