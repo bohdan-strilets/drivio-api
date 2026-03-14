@@ -4,4 +4,5 @@ export { EmailVerificationTokenService } from './email-verification-token.servic
 export { LimitsService } from './limits.service';
 export { OAuthService } from './oauth.service';
 export { PasswordResetService } from './password-reset.service';
+export { SubscriptionService } from './subscription.service';
 export { UserService } from './user.service';

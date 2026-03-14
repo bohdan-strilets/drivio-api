@@ -7,6 +7,7 @@ import {
   LimitsRepository,
   OAuthRepository,
   PasswordResetTokenRepository,
+  SubscriptionRepository,
   UserRepository,
 } from './repositories';
 import {
@@ -16,6 +17,7 @@ import {
   LimitsService,
   OAuthService,
   PasswordResetService,
+  SubscriptionService,
   UserService,
 } from './services';
 import { UserController } from './user.controller';
@@ -35,6 +37,8 @@ import { UserController } from './user.controller';
     OAuthRepository,
     PasswordResetService,
     PasswordResetTokenRepository,
+    SubscriptionService,
+    SubscriptionRepository,
     UserService,
     UserRepository,
   ],
@@ -45,6 +49,7 @@ import { UserController } from './user.controller';
     LimitsService,
     OAuthService,
     PasswordResetService,
+    SubscriptionService,
     UserService,
   ],
 })
