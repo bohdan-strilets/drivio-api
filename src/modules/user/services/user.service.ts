@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, UserStatus } from '@prisma/client';
 
-import { UserNotFoundException } from '../../common/error/exceptions';
+import { UserNotFoundException } from '../../../common/error/exceptions';
 
-import { UserResponse, UserWithCredentials } from './types';
-import { UserRepository } from './user.repository';
-import { normalizeEmail, toUserResponse } from './user.utils';
+import { UserResponse, UserWithCredentials } from '../types';
+import { UserRepository } from '../repositories';
+import { normalizeEmail, toUserResponse } from '../user.utils';
 
 @Injectable()
 export class UserService {
